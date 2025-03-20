@@ -1,8 +1,9 @@
+import { createContext, useContext, useEffect, useState } from 'react';
+
+import { getAccessToken } from '@auth0/nextjs-auth0';
+
 import { useProfile } from '@/hooks/api/useProfile';
 import { User } from '@/models/User';
-import { getAccessToken } from '@auth0/nextjs-auth0';
-import { UseQueryResult } from '@tanstack/react-query';
-import { createContext, useContext, useEffect, useState } from 'react';
 
 interface UserState {
   user: User | undefined;
