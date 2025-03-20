@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
-import { Auth0Provider } from '@auth0/nextjs-auth0';
 
 import './globals.css';
+import { Providers } from '@/components/Providers';
 
 const poppinsFont = Poppins({
   weight: ['400'],
@@ -21,11 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Auth0Provider>
-        <body className={`${poppinsFont.className} antialiased`}>
-          {children}
-        </body>
-      </Auth0Provider>
+      <body className={`${poppinsFont.className} antialiased`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

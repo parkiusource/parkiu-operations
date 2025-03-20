@@ -1,14 +1,30 @@
+'use server';
+
 import { auth0 } from '@/lib/auth0';
-import { getAdminProfile } from '@/utils/api/getAdminProfile';
+import { User, UserStatus } from '@/models/User';
+import { getProfile } from '@/utils/api/getProfile';
+import { redirect } from 'next/navigation';
 
 export default async function AdminMainPage() {
-  const accessToken = await auth0.getAccessToken();
+  let user: User | undefined;
 
-  console.log({ accessToken });
+  try {
+    const accessToken = await auth0.getAccessToken();
 
-  const user = await getAdminProfile(accessToken.token);
+    user = await getProfile(accessToken.token);
+  } catch (e) {
+    console.error(e);
+    redirect('/auth/login');
+  }
 
-  console.log({ user });
+  if (!user) {
+    redirect('/auth/login');
+  }
 
-  return user && <div></div>;
+  if (user.profile.status === UserStatus.PendingProfile) {
+    console.log('Redirecting to onboarding');
+    redirect('/onboarding');
+  }
+
+  return <></>;
 }
