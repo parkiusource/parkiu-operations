@@ -8,7 +8,5 @@ export default function AdminOnboardingPage() {
 
   const { step } = useOnboarding({ user });
 
-  console.log({ step });
-
   return <div></div>;
 }

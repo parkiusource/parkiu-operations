@@ -22,7 +22,6 @@ export default async function AdminMainPage() {
   }
 
   if (user.profile.status === UserStatus.PendingProfile) {
-    console.log('Redirecting to onboarding');
     redirect('/onboarding');
   }
 
